@@ -1,8 +1,8 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Bogie {
     private String name;
@@ -33,21 +33,24 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create a List to store Bogie objects
+        // Create a list of Bogie objects
         List<Bogie> bogies = new ArrayList<>();
 
         // Add passenger bogies
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("Second Sitting", 90));
 
-        // Sort bogies by capacity
-        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        // Filter bogies with capacity greater than 60
+        List<Bogie> filteredBogies = bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
 
-        // Display sorted bogies
-        System.out.println("\nPassenger Bogies Sorted by Capacity:");
+        // Display filtered bogies
+        System.out.println("\nPassenger Bogies with Capacity > 60:");
 
-        for (Bogie bogie : bogies) {
+        for (Bogie bogie : filteredBogies) {
             System.out.println(bogie);
         }
 
