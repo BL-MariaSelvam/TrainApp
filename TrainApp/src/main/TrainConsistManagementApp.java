@@ -8,7 +8,7 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Array of bogie IDs
+        // Sorted array of bogie IDs
         String[] bogieIds = {
                 "BG101",
                 "BG205",
@@ -23,21 +23,32 @@ public class TrainConsistManagementApp {
         System.out.print("Enter Bogie ID to search: ");
         String searchId = scanner.nextLine();
 
+        int low = 0;
+        int high = bogieIds.length - 1;
         boolean found = false;
 
-        // Linear Search
-        for (String id : bogieIds) {
-            if (id.equals(searchId)) {
+        // Binary Search
+        while (low <= high) {
+
+            int mid = (low + high) / 2;
+
+            int result = searchId.compareTo(bogieIds[mid]);
+
+            if (result == 0) {
+                System.out.println("Bogie ID " + searchId +
+                        " found at position " + mid);
                 found = true;
                 break;
+            } else if (result < 0) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
 
-        // Display result
-        if (found) {
-            System.out.println("Bogie ID " + searchId + " exists in the train.");
-        } else {
-            System.out.println("Bogie ID " + searchId + " does not exist in the train.");
+        if (!found) {
+            System.out.println("Bogie ID " + searchId +
+                    " does not exist in the train.");
         }
 
         System.out.println("Program completed successfully.");
