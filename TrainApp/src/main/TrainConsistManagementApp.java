@@ -1,7 +1,7 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrainConsistManagementApp {
 
@@ -9,39 +9,23 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create the train consist
-        List<String> trainConsist = new ArrayList<>();
+        // Create a HashSet for unique bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        System.out.println("Train consist initialized successfully.");
+        // Add bogie IDs (including duplicates)
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101"); // Duplicate
+        bogieIds.add("BG102"); // Duplicate
 
-        // Add passenger bogies
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC Chair");
-        trainConsist.add("First Class");
+        // Display the unique bogie IDs
+        System.out.println("\nUnique Bogie IDs:");
+        System.out.println(bogieIds);
 
-        // Display bogies after insertion
-        System.out.println("\nPassenger Bogies after adding:");
-        System.out.println(trainConsist);
+        // Display total unique bogie count
+        System.out.println("\nTotal Unique Bogie Count: " + bogieIds.size());
 
-        // Remove one bogie
-        trainConsist.remove("AC Chair");
-
-        // Display bogies after removal
-        System.out.println("\nPassenger Bogies after removing AC Chair:");
-        System.out.println(trainConsist);
-
-        // Check whether Sleeper exists
-        if (trainConsist.contains("Sleeper")) {
-            System.out.println("\nSleeper bogie exists in the train.");
-        } else {
-            System.out.println("\nSleeper bogie does not exist in the train.");
-        }
-
-        // Display final list
-        System.out.println("\nFinal Passenger Bogies:");
-        System.out.println(trainConsist);
-
-        System.out.println("\nCurrent Bogie Count : " + trainConsist.size());
-        System.out.println("Program is ready for further operations.");
+        System.out.println("Program completed successfully.");
     }
 }
