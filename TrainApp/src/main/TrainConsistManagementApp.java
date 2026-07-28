@@ -1,6 +1,6 @@
 package main;
 
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class TrainConsistManagementApp {
 
@@ -8,26 +8,40 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Array of bogie type names
-        String[] bogieNames = {
-                "Sleeper",
-                "Cargo",
-                "Engine",
-                "First Class",
-                "AC Chair"
+        // Array of bogie IDs
+        String[] bogieIds = {
+                "BG101",
+                "BG205",
+                "BG310",
+                "BG415",
+                "BG520"
         };
 
-        // Display original array
-        System.out.println("\nBefore Sorting:");
-        System.out.println(Arrays.toString(bogieNames));
+        // Accept bogie ID to search
+        Scanner scanner = new Scanner(System.in);
 
-        // Sort alphabetically
-        Arrays.sort(bogieNames);
+        System.out.print("Enter Bogie ID to search: ");
+        String searchId = scanner.nextLine();
 
-        // Display sorted array
-        System.out.println("\nAfter Sorting:");
-        System.out.println(Arrays.toString(bogieNames));
+        boolean found = false;
 
-        System.out.println("\nProgram completed successfully.");
+        // Linear Search
+        for (String id : bogieIds) {
+            if (id.equals(searchId)) {
+                found = true;
+                break;
+            }
+        }
+
+        // Display result
+        if (found) {
+            System.out.println("Bogie ID " + searchId + " exists in the train.");
+        } else {
+            System.out.println("Bogie ID " + searchId + " does not exist in the train.");
+        }
+
+        System.out.println("Program completed successfully.");
+
+        scanner.close();
     }
 }
