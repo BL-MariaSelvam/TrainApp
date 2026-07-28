@@ -1,6 +1,7 @@
 package main;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrainConsistManagementApp {
 
@@ -8,51 +9,29 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Sorted array of bogie IDs
-        String[] bogieIds = {
-                "BG101",
-                "BG205",
-                "BG310",
-                "BG415",
-                "BG520"
-        };
+        // Create an empty bogie collection
+        List<String> bogies = new ArrayList<>();
 
-        // Accept bogie ID to search
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter Bogie ID to search: ");
-        String searchId = scanner.nextLine();
-
-        int low = 0;
-        int high = bogieIds.length - 1;
-        boolean found = false;
-
-        // Binary Search
-        while (low <= high) {
-
-            int mid = (low + high) / 2;
-
-            int result = searchId.compareTo(bogieIds[mid]);
-
-            if (result == 0) {
-                System.out.println("Bogie ID " + searchId +
-                        " found at position " + mid);
-                found = true;
-                break;
-            } else if (result < 0) {
-                high = mid - 1;
-            } else {
-                low = mid + 1;
+        try {
+            // Defensive check before searching
+            if (bogies.isEmpty()) {
+                throw new IllegalStateException(
+                        "Search cannot be performed. Train consist is empty.");
             }
-        }
 
-        if (!found) {
-            System.out.println("Bogie ID " + searchId +
-                    " does not exist in the train.");
+            // Search logic (only executes if the collection is not empty)
+            String searchId = "BG101";
+
+            if (bogies.contains(searchId)) {
+                System.out.println("Bogie ID " + searchId + " found.");
+            } else {
+                System.out.println("Bogie ID " + searchId + " not found.");
+            }
+
+        } catch (IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
         }
 
         System.out.println("Program completed successfully.");
-
-        scanner.close();
     }
 }
