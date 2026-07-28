@@ -1,39 +1,33 @@
 package main;
 
+import java.util.Arrays;
+
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Array of passenger bogie capacities
-        int[] capacities = {72, 56, 24, 90, 48};
+        // Array of bogie type names
+        String[] bogieNames = {
+                "Sleeper",
+                "Cargo",
+                "Engine",
+                "First Class",
+                "AC Chair"
+        };
 
-        // Display original capacities
-        System.out.println("\nPassenger Bogie Capacities (Before Sorting):");
-        for (int capacity : capacities) {
-            System.out.print(capacity + " ");
-        }
+        // Display original array
+        System.out.println("\nBefore Sorting:");
+        System.out.println(Arrays.toString(bogieNames));
 
-        // Bubble Sort
-        for (int i = 0; i < capacities.length - 1; i++) {
-            for (int j = 0; j < capacities.length - i - 1; j++) {
+        // Sort alphabetically
+        Arrays.sort(bogieNames);
 
-                // Swap if the left element is greater than the right element
-                if (capacities[j] > capacities[j + 1]) {
-                    int temp = capacities[j];
-                    capacities[j] = capacities[j + 1];
-                    capacities[j + 1] = temp;
-                }
-            }
-        }
+        // Display sorted array
+        System.out.println("\nAfter Sorting:");
+        System.out.println(Arrays.toString(bogieNames));
 
-        // Display sorted capacities
-        System.out.println("\n\nPassenger Bogie Capacities (After Bubble Sort):");
-        for (int capacity : capacities) {
-            System.out.print(capacity + " ");
-        }
-
-        System.out.println("\n\nProgram completed successfully.");
+        System.out.println("\nProgram completed successfully.");
     }
 }
