@@ -2,26 +2,18 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 class Bogie {
     private String name;
-    private String type;
     private int capacity;
 
-    public Bogie(String name, String type, int capacity) {
+    public Bogie(String name, int capacity) {
         this.name = name;
-        this.type = type;
         this.capacity = capacity;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public int getCapacity() {
@@ -30,7 +22,7 @@ class Bogie {
 
     @Override
     public String toString() {
-        return name + " (Capacity: " + capacity + ")";
+        return name + " - Capacity: " + capacity;
     }
 }
 
@@ -43,28 +35,25 @@ public class TrainConsistManagementApp {
         // Create a list of Bogie objects
         List<Bogie> bogies = new ArrayList<>();
 
-        // Add bogies
-        bogies.add(new Bogie("Sleeper", "Passenger", 72));
-        bogies.add(new Bogie("AC Chair", "Passenger", 56));
-        bogies.add(new Bogie("First Class", "Passenger", 24));
-        bogies.add(new Bogie("Cargo", "Goods", 100));
-        bogies.add(new Bogie("Parcel Van", "Goods", 80));
+        // Add passenger bogies
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
 
-        // Group bogies by type
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(Bogie::getType));
+        // Calculate total seating capacity using Stream reduce()
+        int totalCapacity = bogies.stream()
+                .map(Bogie::getCapacity)
+                .reduce(0, Integer::sum);
 
-        // Display grouped bogies
-        System.out.println("\nBogies Grouped by Type:");
-
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println(entry.getKey() + " Bogies:");
-            for (Bogie bogie : entry.getValue()) {
-                System.out.println("  " + bogie);
-            }
-            System.out.println();
+        // Display bogie details
+        System.out.println("\nPassenger Bogies:");
+        for (Bogie bogie : bogies) {
+            System.out.println(bogie);
         }
 
-        System.out.println("Program completed successfully.");
+        // Display total seating capacity
+        System.out.println("\nTotal Seating Capacity: " + totalCapacity);
+
+        System.out.println("\nProgram completed successfully.");
     }
 }
