@@ -1,7 +1,31 @@
 package main;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+class Bogie {
+    private String name;
+    private int capacity;
+
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - Capacity: " + capacity;
+    }
+}
 
 public class TrainConsistManagementApp {
 
@@ -9,23 +33,24 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create a HashMap to store bogie-capacity mapping
-        Map<String, Integer> bogieCapacity = new HashMap<>();
+        // Create a List to store Bogie objects
+        List<Bogie> bogies = new ArrayList<>();
 
-        // Insert bogie names and their capacities
-        bogieCapacity.put("Sleeper", 72);
-        bogieCapacity.put("AC Chair", 78);
-        bogieCapacity.put("First Class", 24);
+        // Add passenger bogies
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
 
-        // Display the bogie-capacity details
-        System.out.println("\nBogie Capacity Details:");
+        // Sort bogies by capacity
+        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
 
-        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
+        // Display sorted bogies
+        System.out.println("\nPassenger Bogies Sorted by Capacity:");
+
+        for (Bogie bogie : bogies) {
+            System.out.println(bogie);
         }
 
-        System.out.println("\nTotal Bogies: " + bogieCapacity.size());
-
-        System.out.println("Program completed successfully.");
+        System.out.println("\nProgram completed successfully.");
     }
 }
